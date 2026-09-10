@@ -1,0 +1,32 @@
+[
+  {
+    "trigger": {"url-filter": "https?://([^/]+\\.)?doubleclick\\.net/"},
+    "action": {"type": "block"}
+  },
+  {
+    "trigger": {"url-filter": "https?://([^/]+\\.)?googlesyndication\\.com/"},
+    "action": {"type": "block"}
+  },
+  {
+    "trigger": {"url-filter": "https?://([^/]+\\.)?google-analytics\\.com/"},
+    "action": {"type": "block"}
+  },
+  {
+    "trigger": {"url-filter": "https?://([^/]+\\.)?taboola\\.com/"},
+    "action": {"type": "block"}
+  },
+  {
+    "trigger": {"url-filter": "https?://([^/]+\\.)?outbrain\\.com/"},
+    "action": {"type": "block"}
+  },
+  {
+    "trigger": {
+      "url-filter": ".*",
+      "if-domain": ["*allrecipes.com", "*foodnetwork.com", "*simplyrecipes.com"]
+    },
+    "action": {
+      "type": "css-display-none",
+      "selector": ".ad-container, .advertisement, [data-ad-container], .newsletter-signup"
+    }
+  }
+]
