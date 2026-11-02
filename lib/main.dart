@@ -2,6 +2,7 @@ import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
+import 'promotions/dovren_promotions.dart';
 
 void _trackAppLaunch() {
   var launchTracked = false;
@@ -17,7 +18,7 @@ void main() {
   runApp(
     ClarityWidget(
       clarityConfig: ClarityConfig(projectId: 'ycmeed2que'),
-      app: const DovrenApp(),
+      app: const DovrenPromotions(child: DovrenApp()),
     ),
   );
 }

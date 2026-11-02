@@ -1,7 +1,7 @@
 name: dovren
 description: Dovren — a focused Safari blocker for calmer recipe reading.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+2
 environment:
   sdk: ^3.11.5
   flutter: '>=3.41.7'

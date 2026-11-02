@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/state/dovren_state.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../promotions/dovren_promo_card.dart';
 
 class OverviewSection extends StatelessWidget {
   const OverviewSection({
@@ -19,6 +20,7 @@ class OverviewSection extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
         padding: const EdgeInsets.all(22),
         children: [
+          const DovrenPromoCard(margin: EdgeInsets.only(bottom: 20)),
           const Text(
             'DOVREN',
             style: TextStyle(

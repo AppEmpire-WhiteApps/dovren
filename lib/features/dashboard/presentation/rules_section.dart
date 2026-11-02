@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/state/dovren_state.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../promotions/dovren_promo_card.dart';
 import '../../rules/domain/models/block_rule.dart';
 
 class RulesSection extends StatelessWidget {
@@ -13,6 +14,7 @@ class RulesSection extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
         padding: const EdgeInsets.all(22),
         children: [
+          const DovrenPromoCard(margin: EdgeInsets.only(bottom: 20)),
           const Text(
             'RULES',
             style: TextStyle(
