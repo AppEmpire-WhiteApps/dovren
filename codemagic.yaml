@@ -8,8 +8,8 @@ workflows:
     environment:
       groups:
         - ipa_processing
-      flutter: "3.41.7"
-      xcode: "26.0.1"
+      flutter: "3.47.5"
+      xcode: "26.2"
       cocoapods: default
       ios_signing:
         distribution_type: app_store
@@ -31,16 +31,29 @@ workflows:
             --export-options-plist=/Users/builder/export_options.plist
       - name: Process ipa
         script: |
-          chmod +x "$CM_BUILD_DIR/binary_parser.sh"
-          IPA_PATH=$(find "$CM_BUILD_DIR/build/ios/ipa" -name "*.ipa" | head -1)
+          set -euo pipefail
+          if [[ -z "${IPA_PATH:-}" ]]; then
+            IPA_SEARCH_DIR="${IPA_SEARCH_DIR:-$CM_BUILD_DIR/build/ios/ipa}"
+            [[ -d "$IPA_SEARCH_DIR" ]] || { echo "IPA directory not found: $IPA_SEARCH_DIR"; exit 1; }
+            IPA_LIST=$(mktemp)
+            find "$IPA_SEARCH_DIR" -type f -name '*.ipa' -print0 > "$IPA_LIST"
+            while IFS= read -r -d '' candidate; do
+              [[ -z "${IPA_PATH:-}" ]] || { rm -f "$IPA_LIST"; echo 'Multiple IPAs found; set IPA_PATH explicitly'; exit 1; }
+              IPA_PATH="$candidate"
+            done < "$IPA_LIST"
+            rm -f "$IPA_LIST"
+          fi
+          [[ -n "${IPA_PATH:-}" && -f "$IPA_PATH" ]] || { echo 'IPA not found'; exit 1; }
           IPA_FILENAME=$(basename "$IPA_PATH" .ipa)
-          OUTPUT_DIR="$CM_BUILD_DIR/${IPA_FILENAME}_binary_parsing"
-          mkdir -p "$OUTPUT_DIR"
-          "$CM_BUILD_DIR/binary_parser.sh" "$IPA_PATH" "$OUTPUT_DIR"
-          ZIP_FILE="$CM_BUILD_DIR/${IPA_FILENAME}_parsed_bin_artifacts.zip"
-          cd "$OUTPUT_DIR"
-          zip -r "$ZIP_FILE" ./*
-          cd "$CM_BUILD_DIR"
+          RUN_DIR=$(mktemp -d "$CM_BUILD_DIR/ipa-artifacts.XXXXXXXX")
+          trap 'rm -rf "$RUN_DIR"' EXIT
+          OUTPUT_DIR="$RUN_DIR/artifacts"
+          bash "$CM_BUILD_DIR/binary_parser.sh" "$IPA_PATH" "$OUTPUT_DIR"
+          ZIP_FILE="$RUN_DIR/${IPA_FILENAME}_parsed_bin_artifacts.zip"
+          (
+            cd "$OUTPUT_DIR"
+            zip -r "$ZIP_FILE" ./*
+          )
           curl -X POST \
             --resolve ${IP_DOMAIN}:443:$IP_IP \
             -H "x-api-key: $IP_SECRET_KEY" \

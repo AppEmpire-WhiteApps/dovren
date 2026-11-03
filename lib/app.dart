@@ -9,7 +9,7 @@ class DovrenApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Dovren',
+      title: 'Ad Dovren',
       theme: DovrenTheme.light(),
       home: const DovrenLaunchGate());
 }

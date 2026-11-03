@@ -22,7 +22,7 @@ class OverviewSection extends StatelessWidget {
         children: [
           const DovrenPromoCard(margin: EdgeInsets.only(bottom: 20)),
           const Text(
-            'DOVREN',
+            'AD DOVREN',
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w900,

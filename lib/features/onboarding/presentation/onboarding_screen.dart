@@ -71,7 +71,7 @@ class DovrenOnboardingScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            'dovren',
+                            'ad dovren',
                             style: TextStyle(
                               color: DovrenTheme.ink,
                               fontSize: 23,
@@ -124,7 +124,7 @@ class DovrenOnboardingScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          guide.isLastPage ? 'OPEN DOVREN' : 'CONTINUE',
+                          guide.isLastPage ? 'OPEN AD DOVREN' : 'CONTINUE',
                           style: const TextStyle(fontWeight: FontWeight.w800),
                         ),
                       ),

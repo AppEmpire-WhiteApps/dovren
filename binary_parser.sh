@@ -1,149 +1,88 @@
 #!/bin/bash
-
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
-NC='\033[0m'
-
-if [[ "$#" -ne 2 ]]; then
-    echo "Usage: $0 <ipa_path> <output_path>"
-    exit 1
-fi
-
-IPA_PATH="$1"
-OUTPUT_PATH="$2"
-START_TIME=$(date +%s)
-
-if [[ ! -f "$IPA_PATH" ]]; then
-    echo -e "${RED}Error: .ipa file not found: $IPA_PATH${NC}"
-    exit 1
-fi
-
-if [[ -z "$OUTPUT_PATH" ]]; then
-    OUTPUT_PATH=$(mktemp -d)
-    echo -e "${YELLOW}Output path not specified. Using temporary directory: $OUTPUT_PATH${NC}"
-fi
-
-IPA_DIRNAME=$(dirname "$IPA_PATH")
-IPA_BASENAME=$(basename "$IPA_PATH")
-
-EXTRACT_DIR="$IPA_DIRNAME/${IPA_BASENAME%.ipa}_extract"
-mkdir -p "$EXTRACT_DIR"
-
-trap 'rm -rf "$EXTRACT_DIR"' EXIT
-
-unzip -q "$IPA_PATH" -d "$EXTRACT_DIR"
-
-APP_PATH=$(find "$EXTRACT_DIR/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)
-DEFAULT_APP_PATH="$APP_PATH"
-FLUTTER_APP_PATH="$APP_PATH/Frameworks/App.framework/App"
-UNITY_APP_PATH="$APP_PATH/Frameworks/UnityFramework.framework/UnityFramework"
-
-APP_TYPE="native"
-
-if [[ -f "$FLUTTER_APP_PATH" ]]; then
-    APP_TYPE="flutter"
-elif [[ -f "$UNITY_APP_PATH" ]]; then
-    APP_TYPE="unity"
-fi
-
-case $APP_TYPE in
-    native)
-        echo "Native iOS application"
-        ;;
-    flutter)
-        echo "Flutter iOS application"
-        APP_PATH="$FLUTTER_APP_PATH"
-        ;;
-    unity)
-        echo "Unity iOS application"
-        APP_PATH="$UNITY_APP_PATH"
-        ;;
-    *)
-        echo -e "${RED}Error: Unknown application type${NC}"
-        exit 1
-        ;;
-esac
-
-if [[ -z "$APP_PATH" ]]; then
-    echo -e "${RED}Error: .app directory not found in .ipa file${NC}"
-    exit 1
-fi
-
-APP_NAME=$(basename "$APP_PATH" .app)
-DEFAULT_APP_NAME=$(basename "$DEFAULT_APP_PATH" .app)
-BINARY_PATH="$APP_PATH/$APP_NAME"
-DEFAULT_BINARY_PATH="$DEFAULT_APP_PATH/$DEFAULT_APP_NAME"
-
-if [[ ! -f "$BINARY_PATH" ]]; then
-    BINARY_PATH=$(find "$APP_PATH" -maxdepth 1 -type f -perm +111 | head -n 1)
-fi
-
-if [[ ! -f "$BINARY_PATH" ]]; then
-    echo "Error: binary not found"
-    exit 1
-fi
-
-BINARY_DIRNAME=$(dirname "$DEFAULT_BINARY_PATH")
-INFO_PLIST="$BINARY_DIRNAME/Info.plist"
-
-handle_result() {
-    local file="$1"
-    local title="$2"
-    if [[ "$(wc -l < "$file" | tr -d ' ')" -gt 0 ]]; then
-        echo -e "${GREEN}$title exported: $file${NC}"
-    else
-        echo -e "${RED}Failed to create $title${NC}"
-    fi
+# macOS / Xcode Command Line Tools; compatible with system Bash 3.2.
+set -euo pipefail
+export LC_ALL=C
+fail() { printf 'Error: %s\n' "$*" >&2; exit 1; }
+[[ $# -eq 2 ]] || fail "Usage: $0 <ipa_path> <output_path>"
+[[ -f "$1" ]] || fail "IPA not found: $1"
+[[ -n "$2" ]] || fail 'Output directory must not be empty'
+for tool in unzip find file strings sort awk otool nm shasum plutil mktemp; do
+    command -v "$tool" >/dev/null || fail "Required tool missing: $tool (macOS with Xcode Command Line Tools required)"
+done
+[[ -x /usr/libexec/PlistBuddy ]] || fail 'PlistBuddy is required'
+IPA_PATH="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+mkdir -p "$2"
+OUTPUT_PATH=$(cd "$2" && pwd)
+# Refuse stale results instead of mixing artifacts from different builds.
+[[ -z "$(find "$OUTPUT_PATH" -mindepth 1 -maxdepth 1 -print -quit)" ]] || fail 'Output directory must be empty; use a new directory for each run'
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/ipa-parser.XXXXXXXX")
+trap 'rm -rf "$TEMP_DIR"' EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+mkdir "$TEMP_DIR/extract" "$TEMP_DIR/result"
+RESULT="$TEMP_DIR/result"
+unzip -q "$IPA_PATH" -d "$TEMP_DIR/extract" || fail 'Cannot extract IPA'
+[[ -d "$TEMP_DIR/extract/Payload" ]] || fail 'Payload directory missing'
+APP_PATH=''
+for candidate in "$TEMP_DIR/extract/Payload/"*.app; do
+    [[ -d "$candidate" ]] || continue
+    [[ -z "$APP_PATH" ]] || fail 'Multiple top-level applications in IPA; ambiguous input'
+    APP_PATH="$candidate"
+done
+[[ -n "$APP_PATH" ]] || fail 'No application in Payload'
+# Do not follow archive links to files outside the extracted application.
+[[ -z "$(find "$TEMP_DIR/extract" -type l -print -quit)" ]] || fail 'IPA contains symbolic links; supply a standard exported iOS IPA without symlinks'
+cd "$APP_PATH"
+[[ -f Info.plist ]] || fail 'Application Info.plist missing'
+EXECUTABLE=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' Info.plist) || fail 'CFBundleExecutable missing'
+[[ -n "$EXECUTABLE" && "$EXECUTABLE" != */* && "$EXECUTABLE" != '.' && "$EXECUTABLE" != '..' ]] || fail 'Invalid CFBundleExecutable'
+MAIN_BINARY="./$EXECUTABLE"
+is_macho() {
+    local description
+    description=$(file -b "$1") || return 1
+    [[ "$description" == *Mach-O* ]]
 }
-
-strings "$BINARY_PATH" | awk 'length>=1 && /[^ -~]/==0' | sort -u > "$OUTPUT_PATH/strings.txt" || touch "$OUTPUT_PATH/strings.txt"
-if [[ "$APP_TYPE" != "native" ]]; then 
-    find "$DEFAULT_APP_PATH" -type f \( -name "*.framework/*" -o -name "*.dylib" \) -perm +111 | \
-    while read binary; do
-        strings "$binary" >> "$OUTPUT_PATH/strings.txt"
-    done
+[[ -f "$MAIN_BINARY" ]] && is_macho "$MAIN_BINARY" || fail "Application executable is missing or not Mach-O: $EXECUTABLE"
+# Preserve the historical hash target for Flutter and Unity.
+PRIMARY_BINARY="$MAIN_BINARY"
+APP_TYPE='native / other iOS'
+if [[ -f ./Frameworks/App.framework/App ]] && is_macho ./Frameworks/App.framework/App; then
+    PRIMARY_BINARY='./Frameworks/App.framework/App'
+    APP_TYPE='flutter'
+elif [[ -f ./Frameworks/UnityFramework.framework/UnityFramework ]] && is_macho ./Frameworks/UnityFramework.framework/UnityFramework; then
+    PRIMARY_BINARY='./Frameworks/UnityFramework.framework/UnityFramework'
+    APP_TYPE='unity'
 fi
-handle_result "$OUTPUT_PATH/strings.txt" "Strings"
-
-if [[ "$APP_TYPE" == "flutter" ]]; then
-    WORKING_PATH="$DEFAULT_BINARY_PATH"
-else
-    WORKING_PATH="$BINARY_PATH"
-fi
-
-otool -L "$WORKING_PATH" | sort > "$OUTPUT_PATH/frameworks.txt" || touch "$OUTPUT_PATH/frameworks.txt"
-handle_result "$OUTPUT_PATH/frameworks.txt" "Frameworks"
-
-nm -u "$WORKING_PATH" | sort > "$OUTPUT_PATH/external_symbols.txt" || touch "$OUTPUT_PATH/external_symbols.txt"
-handle_result "$OUTPUT_PATH/external_symbols.txt" "External symbols"
-
-otool -oV "$WORKING_PATH" > "$OUTPUT_PATH/objc.txt" || touch "$OUTPUT_PATH/objc.txt"
-handle_result "$OUTPUT_PATH/objc.txt" "Objective-C"
-
-shasum -a 256 "$BINARY_PATH" | awk '{print $1}' > "$OUTPUT_PATH/binary_hash.txt" || touch "$OUTPUT_PATH/binary_hash.txt"
-handle_result "$OUTPUT_PATH/binary_hash.txt" "Binary hash"
-
-plutil -p "$INFO_PLIST" > "$OUTPUT_PATH/info_plist.txt" || touch "$OUTPUT_PATH/info_plist.txt"
-handle_result "$OUTPUT_PATH/info_plist.txt" "Info.plist"
-
-find "$DEFAULT_APP_PATH" \( -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.webp" -o -iname "*.pdf" \) \) \
-    -print0 | \
-    while IFS= read -r -d '' media; do
-        shasum -a 256 "$media" | awk '{print $1}'
-    done | sort -u > "$OUTPUT_PATH/assets_hashes.txt" || touch "$OUTPUT_PATH/assets_hashes.txt"
-
-find "$APP_PATH" \( -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.webp" -o -iname "*.pdf" \) \) \
-    -print0 | \
-    while IFS= read -r -d '' media; do
-        shasum -a 256 "$media" | awk '{print $1}'
-    done | sort -u >> "$OUTPUT_PATH/assets_hashes.txt"
-handle_result "$OUTPUT_PATH/assets_hashes.txt" "Assets hashes"
-
-END_TIME=$(date +%s)
-DURATION=$((END_TIME - START_TIME))
-MINUTES=$((DURATION / 60))
-SECONDS=$((DURATION % 60))
-
-echo -e "${CYAN}Extraction completed ${MINUTES}:$(printf "%02d" $SECONDS)${NC}"
+printf 'Application: %s; type: %s; hash target: %s\n' "$EXECUTABLE" "$APP_TYPE" "$PRIMARY_BINARY"
+# Find actual Mach-O files, regardless of filename or executable permission bits.
+# Includes embedded frameworks, dylibs, extensions, and watch applications.
+find . -type f -print0 > "$TEMP_DIR/files"
+: > "$TEMP_DIR/strings"
+while IFS= read -r -d '' binary; do
+    if is_macho "$binary"; then
+        strings "$binary" >> "$TEMP_DIR/strings" || fail "strings failed: $binary"
+    fi
+done < "$TEMP_DIR/files"
+awk 'length>=1 && /[^ -~]/==0' "$TEMP_DIR/strings" | sort -u > "$RESULT/strings.txt"
+# Keep the original server-facing meaning of these three reports.
+WORKING_BINARY="$PRIMARY_BINARY"
+[[ "$APP_TYPE" != flutter ]] || WORKING_BINARY="$MAIN_BINARY"
+otool -L "$WORKING_BINARY" | sort > "$RESULT/frameworks.txt"
+nm -u "$WORKING_BINARY" | sort > "$RESULT/external_symbols.txt"
+otool -oV "$WORKING_BINARY" > "$RESULT/objc.txt"
+shasum -a 256 "$PRIMARY_BINARY" | awk '{print $1}' > "$RESULT/binary_hash.txt"
+plutil -p Info.plist > "$RESULT/info_plist.txt"
+: > "$TEMP_DIR/assets"
+while IFS= read -r -d '' asset; do
+    case "$asset" in
+        *.[pP][nN][gG]|*.[jJ][pP][gG]|*.[jJ][pP][eE][gG]|*.[gG][iI][fF]|*.[wW][eE][bB][pP]|*.[pP][dD][fF])
+            shasum -a 256 "$asset" | awk '{print $1}' >> "$TEMP_DIR/assets" ;;
+    esac
+done < "$TEMP_DIR/files"
+sort -u "$TEMP_DIR/assets" > "$RESULT/assets_hashes.txt"
+# Publish only after every extraction command succeeds. Empty reports are valid
+# for stripped binaries, applications without ObjC, or without loose images.
+for artifact in "$RESULT/"*.txt; do
+    cp "$artifact" "$OUTPUT_PATH/"
+done
+printf 'Extraction completed: %s\n' "$OUTPUT_PATH"

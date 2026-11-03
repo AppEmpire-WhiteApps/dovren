@@ -60,11 +60,11 @@ class SettingsSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 22),
-          const _SectionLabel('DOVREN'),
+          const _SectionLabel('AD DOVREN'),
           const SizedBox(height: 10),
           const Card(
             child: QuietRulesInfoPanel(
-              appName: 'Dovren',
+              appName: 'Ad Dovren',
               accent: DovrenTheme.orange,
               textColor: DovrenTheme.muted,
             ),
@@ -102,7 +102,7 @@ class SettingsSection extends StatelessWidget {
                 ),
                 const _SetupStep(
                   number: '2',
-                  title: 'Choose Dovren',
+                  title: 'Choose Ad Dovren',
                   description: 'Turn on the Dovren content blocker.',
                 ),
                 const _SetupStep(
