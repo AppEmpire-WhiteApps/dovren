@@ -116,6 +116,27 @@ class NboPacketTunnelProvider: NEPacketTunnelProvider {
     forwardingLock.unlock()
   }
 
+  private func installBridge(_ candidate: XrayBridge) -> Bool {
+    forwardingLock.lock()
+    defer { forwardingLock.unlock() }
+    guard !startupStopped else { return false }
+    bridge = candidate
+    forwardingReady = true
+    reasserting = false
+    return true
+  }
+
+  private func beginTeardown() -> XrayBridge? {
+    forwardingLock.lock()
+    defer { forwardingLock.unlock() }
+    startupStopped = true
+    forwardingReady = false
+    reasserting = false
+    let current = bridge
+    bridge = nil
+    return current
+  }
+
   override func startTunnel(options: [String: NSObject]? = nil) async throws {
     guard let configuration = protocolConfiguration as? NETunnelProviderProtocol else {
       throw tunnelError("Missing tunnel provider configuration")
@@ -183,26 +204,21 @@ class NboPacketTunnelProvider: NEPacketTunnelProvider {
       finalConfigPath: finalConfig,
       preset: .mobile,
       traceHandle: { message in
-        rememberTunnelLog(NativeDiagnosticMessage(stringLiteral: message))
+        rememberTunnelLog(NativeLogPrivacy.runtimeEvent(message))
       }
     )
-    guard !isStartupStopped() else {
+    guard installBridge(xrayBridge) else {
       xrayBridge.stop()
       throw CancellationError()
     }
-    bridge = xrayBridge
-    setForwardingReady(true)
     rememberTunnelLog("Xray bridge started")
   }
 
   override func stopTunnel(
     with reason: NEProviderStopReason, completionHandler: @escaping () -> Void
   ) {
-    forwardingLock.lock()
-    startupStopped = true
-    forwardingLock.unlock()
+    let currentBridge = beginTeardown()
     rememberTunnelLog("Stopping Xray packet tunnel, reason=\(reason.rawValue)")
-    setForwardingReady(false)
     let teardown = DispatchGroup()
     teardown.enter()
     if let configuration = protocolConfiguration as? NETunnelProviderProtocol {
@@ -222,8 +238,7 @@ class NboPacketTunnelProvider: NEPacketTunnelProvider {
     } else {
       teardown.leave()
     }
-    bridge?.stop()
-    bridge = nil
+    currentBridge?.stop()
     teardown.notify(queue: .main, execute: completionHandler)
   }
 
@@ -235,7 +250,9 @@ class NboPacketTunnelProvider: NEPacketTunnelProvider {
     if message == "xray_runtime_state" {
       completionHandler?(Data((isForwardingReady() ? "ready" : "recovering").utf8))
     } else if message == "xray_traffic" {
+      forwardingLock.lock()
       let stats = bridge?.getAndClearStats()
+      forwardingLock.unlock()
       let sent = stats?.sent ?? 0
       let received = stats?.received ?? 0
       rememberTunnelLog("Traffic: upBytes=\(sent) downBytes=\(received)")
