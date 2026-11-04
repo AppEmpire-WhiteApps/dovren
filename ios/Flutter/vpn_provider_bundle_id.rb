@@ -3,7 +3,14 @@ require 'pathname'
 
 # Keep the hosted plugin untouched; compile an app-local copy with its Network ID.
 def configure_vpn_provider_bundle_id(installer)
-  target = installer.pods_project.targets.find { |entry| entry.name == 'flutter_vless' }
+  pod_target = installer.pod_targets.find { |entry| entry.pod_name == 'flutter_vless' }
+  raise 'flutter_vless Pod target is missing' unless pod_target
+
+  unless pod_target.root_spec.version.to_s == '1.1.6'
+    raise 'Review the Network ID adapter before changing flutter_vless 1.1.6'
+  end
+
+  target = installer.pods_project.targets.find { |entry| entry.name == pod_target.label }
   raise 'flutter_vless target is missing from the Pods project' unless target
 
   references = target.source_build_phase.files.map(&:file_ref).compact.select do |reference|
@@ -11,15 +18,13 @@ def configure_vpn_provider_bundle_id(installer)
   end
   raise 'Expected one compiled FlutterVlessPlugin.swift source' unless references.length == 1
 
-  ios_root = Pathname.new(__dir__).parent
-  plugin_root = ios_root.join('.symlinks/plugins/flutter_vless/ios')
-  podspec = plugin_root.join('flutter_vless.podspec').read
-  unless podspec.match?(/s\.version\s*=\s*['"]1\.1\.6['"]/)
-    raise 'Review the Network ID adapter before changing flutter_vless 1.1.6'
+  source_paths = pod_target.file_accessors.flat_map(&:source_files).select do |path|
+    File.basename(path.to_s) == 'FlutterVlessPlugin.swift'
   end
+  source_paths = source_paths.map(&:realpath).uniq
+  raise 'Expected one original FlutterVlessPlugin.swift source' unless source_paths.length == 1
 
-  source_path = plugin_root.join('flutter_vless/Sources/flutter_vless/FlutterVlessPlugin.swift')
-  source = source_path.read
+  source = source_paths.first.read
   signature = '        self.packetTunnelManager = PacketTunnelManager(providerBundleIdentifier: "\(providerBundleIdentifier).XrayTunnel",'
   unless source.scan(Regexp.new(Regexp.escape(signature))).length == 1
     raise 'flutter_vless initialization changed; review the Network ID adapter'
