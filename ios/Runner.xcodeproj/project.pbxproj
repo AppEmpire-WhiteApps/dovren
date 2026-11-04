@@ -11,19 +11,37 @@
 		0A80A15703C4BFBCC98A2CDB /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DCCF06D7438A2B50E356A2 /* Pods_RunnerTests.framework */; };
 		0EA9141A774E0B3A775B4348 /* DovrenRecipeShield.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26459FDF66E2A32DE9E17A36 /* DovrenRecipeShield.appex */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		2836C959F8C4070DF1721447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA81C612758F39CCA07978E /* Foundation.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
+		3933F0C2D204C623FF034213 /* TunnelSecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3A3C5D1F06F39D5674F76 /* TunnelSecretStore.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		40E99AA7C1DF34BB8E005A22 /* BlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E4F1E789854D4835FC7F0 /* BlockerRequestHandler.swift */; };
+		500477CE8A18DB0D3A24A054 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F93925766AAEBE4A7B3961 /* NetworkExtension.framework */; };
+		665D650F6EA31DC72DE59D91 /* NboConduit.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AF2F5E2CFC440815FA15B91E /* NboConduit.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70CA8228AC7824C4C4CC813E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D329810B4104765BEE3550 /* Foundation.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		9953F82E3D63F8CC0F48A3C4 /* TunnelOnDemandPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D95E120D153B3B5F1EF8F8B /* TunnelOnDemandPolicy.swift */; };
 		B5223098F16C51C0D53D24A8 /* BlockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = D768A706077E3C253A275012 /* BlockerList.json */; };
+		D6C4773E4184FC32E22795F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95216832F21B36FBB0495E8C /* Security.framework */; };
+		DE38AD1EC66728892F924AAA /* NativeDiagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1091FF2698FB0D14FBC09D49 /* NativeDiagnostics.swift */; };
+		E2BCFC8E81223A9002686B20 /* TunnelProbePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B97BD982960B27D1582E44A /* TunnelProbePolicy.swift */; };
+		E88C28265993763A0BEA534D /* NboPacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6E15A4FED3FEA1276AED2 /* NboPacketTunnelProvider.swift */; };
+		F2F211D92C30FD9AE61DE6DD /* SwiftyXrayKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83DD65230DA43A044A2F7B /* SwiftyXrayKit */; };
+		F759C6E7B86F0CDFA9F1D05C /* TunnelRuntimeSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C716EDA32A2184ACF25F905 /* TunnelRuntimeSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		06A2423AA98C2A9F852265F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F34D9571FD33E13670DDAF08;
+			remoteInfo = NboConduit;
+		};
 		331C8085294A63A400263BE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
@@ -48,6 +66,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				0EA9141A774E0B3A775B4348 /* DovrenRecipeShield.appex in Embed App Extensions */,
+				665D650F6EA31DC72DE59D91 /* NboConduit.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,21 +85,30 @@
 
 /* Begin PBXFileReference section */
 		0931CBAE63FA00501807B835 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1091FF2698FB0D14FBC09D49 /* NativeDiagnostics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeDiagnostics.swift; sourceTree = "<group>"; };
 		13555D333195FA73C22796D2 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		151678D8F75BC83AB3C20753 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		1A8B3023AA1CE1394040F9AB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B52E558C587D81CD991689D /* FlutterVersion.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FlutterVersion.xcconfig; sourceTree = "<group>"; };
 		1FE8A512C7FE97B6A6B6B650 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		26459FDF66E2A32DE9E17A36 /* DovrenRecipeShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DovrenRecipeShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D329810B4104765BEE3550 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2B97BD982960B27D1582E44A /* TunnelProbePolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TunnelProbePolicy.swift; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		4EE52FE054E3FFB74EF9770B /* Runner.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		516E4F1E789854D4835FC7F0 /* BlockerRequestHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BlockerRequestHandler.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		77F3A3C5D1F06F39D5674F76 /* TunnelSecretStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TunnelSecretStore.swift; sourceTree = "<group>"; };
 		7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		7D95E120D153B3B5F1EF8F8B /* TunnelOnDemandPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TunnelOnDemandPolicy.swift; sourceTree = "<group>"; };
+		8C716EDA32A2184ACF25F905 /* TunnelRuntimeSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TunnelRuntimeSupport.swift; sourceTree = "<group>"; };
+		95216832F21B36FBB0495E8C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,9 +118,14 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CB8A6997F1723F9C1923D10 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		AD1C7A5A6F7793CB75515B2A /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF2F5E2CFC440815FA15B91E /* NboConduit.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NboConduit.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4B5D830F18BA7078115F769 /* NboConduit.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = NboConduit.entitlements; sourceTree = "<group>"; };
 		D5DCCF06D7438A2B50E356A2 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D768A706077E3C253A275012 /* BlockerList.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = BlockerList.json; sourceTree = "<group>"; };
 		F32A64EB253ECE21E5E0A08A /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		F7F6E15A4FED3FEA1276AED2 /* NboPacketTunnelProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NboPacketTunnelProvider.swift; sourceTree = "<group>"; };
+		F8F93925766AAEBE4A7B3961 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		FDA81C612758F39CCA07978E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +142,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				087161DC59FC8F07DBD91CA7 /* Pods_Runner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8563B0DA197C28E6ED6292C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2836C959F8C4070DF1721447 /* Foundation.framework in Frameworks */,
+				500477CE8A18DB0D3A24A054 /* NetworkExtension.framework in Frameworks */,
+				D6C4773E4184FC32E22795F1 /* Security.framework in Frameworks */,
+				F2F211D92C30FD9AE61DE6DD /* SwiftyXrayKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +209,7 @@
 				2728F8AE378E9ADD02545A36 /* Pods */,
 				BECCB4B15ACA6EDF88A407EE /* Frameworks */,
 				B8EACF7D5C1BA2D11C3B135E /* BlockerExtension */,
+				E32115556B61E5B80665A1A3 /* NboConduit */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +219,7 @@
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
 				26459FDF66E2A32DE9E17A36 /* DovrenRecipeShield.appex */,
+				AF2F5E2CFC440815FA15B91E /* NboConduit.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,6 +236,7 @@
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				4EE52FE054E3FFB74EF9770B /* Runner.entitlements */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -217,8 +264,37 @@
 				0931CBAE63FA00501807B835 /* Pods_Runner.framework */,
 				D5DCCF06D7438A2B50E356A2 /* Pods_RunnerTests.framework */,
 				A3B9F8DA7FC14804AE831522 /* iOS */,
+				FDA81C612758F39CCA07978E /* Foundation.framework */,
+				F8F93925766AAEBE4A7B3961 /* NetworkExtension.framework */,
+				95216832F21B36FBB0495E8C /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C494E21B1C3FB0B22940DE9D /* VendoredTunnelSupport */ = {
+			isa = PBXGroup;
+			children = (
+				1091FF2698FB0D14FBC09D49 /* NativeDiagnostics.swift */,
+				77F3A3C5D1F06F39D5674F76 /* TunnelSecretStore.swift */,
+				7D95E120D153B3B5F1EF8F8B /* TunnelOnDemandPolicy.swift */,
+				8C716EDA32A2184ACF25F905 /* TunnelRuntimeSupport.swift */,
+			);
+			name = VendoredTunnelSupport;
+			path = VendoredTunnelSupport;
+			sourceTree = "<group>";
+		};
+		E32115556B61E5B80665A1A3 /* NboConduit */ = {
+			isa = PBXGroup;
+			children = (
+				F7F6E15A4FED3FEA1276AED2 /* NboPacketTunnelProvider.swift */,
+				2B97BD982960B27D1582E44A /* TunnelProbePolicy.swift */,
+				1A8B3023AA1CE1394040F9AB /* Info.plist */,
+				B4B5D830F18BA7078115F769 /* NboConduit.entitlements */,
+				1B52E558C587D81CD991689D /* FlutterVersion.xcconfig */,
+				C494E21B1C3FB0B22940DE9D /* VendoredTunnelSupport */,
+			);
+			name = NboConduit;
+			path = NboConduit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +337,7 @@
 			);
 			dependencies = (
 				6344140C03FB51A610805AFE /* PBXTargetDependency */,
+				78E0EBACCC95CDC001880304 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -284,6 +361,26 @@
 			productReference = 26459FDF66E2A32DE9E17A36 /* DovrenRecipeShield.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		F34D9571FD33E13670DDAF08 /* NboConduit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5382DFD195771AFAAE46380D /* Build configuration list for PBXNativeTarget "NboConduit" */;
+			buildPhases = (
+				AB5CDAD069C17FB7584F765D /* Sources */,
+				A8563B0DA197C28E6ED6292C /* Frameworks */,
+				416BC49D077B76359ED259EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NboConduit;
+			packageProductDependencies = (
+				3B83DD65230DA43A044A2F7B /* SwiftyXrayKit */,
+			);
+			productName = NboConduit;
+			productReference = AF2F5E2CFC440815FA15B91E /* NboConduit.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -301,6 +398,30 @@
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					F34D9571FD33E13670DDAF08 = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -313,6 +434,9 @@
 				Base,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
+			packageReferences = (
+				8D6270AFF9D8E556F1258A2A /* XCRemoteSwiftPackageReference "SwiftyXrayKit" */,
+			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -320,12 +444,20 @@
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
 				B81DC08C68CC1E3691473716 /* DovrenRecipeShield */,
+				F34D9571FD33E13670DDAF08 /* NboConduit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		331C807F294A63A400263BE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		416BC49D077B76359ED259EF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -467,6 +599,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AB5CDAD069C17FB7584F765D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E88C28265993763A0BEA534D /* NboPacketTunnelProvider.swift in Sources */,
+				E2BCFC8E81223A9002686B20 /* TunnelProbePolicy.swift in Sources */,
+				DE38AD1EC66728892F924AAA /* NativeDiagnostics.swift in Sources */,
+				3933F0C2D204C623FF034213 /* TunnelSecretStore.swift in Sources */,
+				9953F82E3D63F8CC0F48A3C4 /* TunnelOnDemandPolicy.swift in Sources */,
+				F759C6E7B86F0CDFA9F1D05C /* TunnelRuntimeSupport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD885FB506D0A8725F3640FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,6 +633,12 @@
 			name = DovrenRecipeShield;
 			target = B81DC08C68CC1E3691473716 /* DovrenRecipeShield */;
 			targetProxy = D0A6EE269E4C7B837059A6FA /* PBXContainerItemProxy */;
+		};
+		78E0EBACCC95CDC001880304 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NboConduit;
+			target = F34D9571FD33E13670DDAF08 /* NboConduit */;
+			targetProxy = 06A2423AA98C2A9F852265F6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -570,6 +721,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
@@ -646,12 +798,12 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.block;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -785,6 +937,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
@@ -813,6 +966,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
@@ -834,17 +988,75 @@
 			};
 			name = Release;
 		};
+		A17D4405408873C76AE8C633 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B52E558C587D81CD991689D /* FlutterVersion.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = NboConduit/NboConduit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NboConduit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.netextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE6309DFD0ECD0ECF0AAE0C6 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B52E558C587D81CD991689D /* FlutterVersion.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = NboConduit/NboConduit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NboConduit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.netextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile;
+		};
 		D83D0309F52D2471D9266210 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.block;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -858,17 +1070,45 @@
 			};
 			name = Debug;
 		};
+		FB63B3013312CC4E6B35F13A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B52E558C587D81CD991689D /* FlutterVersion.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = NboConduit/NboConduit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NboConduit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.netextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		FC77114ECD4549B10E294ED1 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DovrenAdBlockwa1645.app.block;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -892,6 +1132,16 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5382DFD195771AFAAE46380D /* Build configuration list for PBXNativeTarget "NboConduit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A17D4405408873C76AE8C633 /* Release */,
+				FB63B3013312CC4E6B35F13A /* Debug */,
+				BE6309DFD0ECD0ECF0AAE0C6 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -927,6 +1177,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8D6270AFF9D8E556F1258A2A /* XCRemoteSwiftPackageReference "SwiftyXrayKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dima-u/SwiftyXrayKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3B83DD65230DA43A044A2F7B /* SwiftyXrayKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D6270AFF9D8E556F1258A2A /* XCRemoteSwiftPackageReference "SwiftyXrayKit" */;
+			productName = SwiftyXrayKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97C146E61CF9000F007C117D /* Project object */;
 }

@@ -66,5 +66,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>FlutterVlessPacketTunnelBundleIdentifier</key>
+	<string>com.DovrenAdBlockwa1645.app.netextension</string>
 </dict>
 </plist>
